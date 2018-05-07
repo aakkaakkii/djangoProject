@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'fragments/core/core_css.html' %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+    {% include 'fragments/navbar.html' %}
+
+    {{ name }}
+
+    {% if articles %}
+    <div class="container">
+        <div class="row">
+        {% for article in articles %}
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        {{ article.title }}
+                    </div>
+                    <div class="card-body">
+                        {{ article.text }}
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn btn-dark"><a href="{% url "article_page" id=article.id %}">more</a></div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% include 'fragments/footer.html' %}
+    {% include 'fragments/core/core_js.html' %}
+</body>
+</html>
