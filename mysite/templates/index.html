@@ -27,7 +27,7 @@
                         {{ article.text }}
                     </div>
                     <div class="card-footer">
-                        <div class="btn btn-dark"><a href="{% url "article_page" id=article.id %}">more</a></div>
+                        <div class="btn btn-dark"><a href="/article/{{ article.id }}">more</a></div>
                     </div>
                 </div>
             </div>

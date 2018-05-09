@@ -12,29 +12,14 @@
 <body>
     {% include 'fragments/navbar.html' %}
 
-    {{ name }}
 
-    {% if articles %}
     <div class="container">
         <div class="row">
-        {% for article in articles %}
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-header">
-                        {{ article.title }}
-                    </div>
-                    <div class="card-body">
-                        {{ article.text }}
-                    </div>
-                    <div class="card-footer">
-                        <div class="btn btn-dark"><a href="{% url "article_page" id=article.id %}">more</a></div>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+            {{ articles.title }}
+        <br>
+            {{ articles.text }}
         </div>
     </div>
-    {% endif %}
 
     {% include 'fragments/footer.html' %}
     {% include 'fragments/core/core_js.html' %}

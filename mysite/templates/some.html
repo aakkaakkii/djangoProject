@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'fragments/core/core_css.html' %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+{% include 'fragments/navbar.html' %}
+
+
+<div>
+    {{ title }}
+</div>
+<div>
+    {{ text }}
+</div>
+
+{% include 'fragments/footer.html' %}
+{% include 'fragments/core/core_js.html' %}
+</body>
+</html>
