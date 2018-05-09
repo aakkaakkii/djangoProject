@@ -26,10 +26,11 @@ def get_data(request):
     if request.method == 'POST':
         form = NameForm(request.POST)
         some = {
-            'title': form['title'].value(),
-            'text': form['text'].value(),
-
+            'text': 'ayy lmao',
         }
+        article_obj = Article(title=form['title'].value(), text=form['text'].value())
+        article_obj.save()
+
         return render(request, 'some.html', some)
 
     return render(request, 'some.html', {'title': '12341234'})
