@@ -10,13 +10,14 @@
 
 </head>
 <body>
-    {% include 'fragments/navbar.html' %}
+{% include 'fragments/navbar.html' %}
 
-    {{ name }}
+{{ name }}
 
-    {% if articles %}
+<!-- {% if articles %}
     <div class="container">
         <div class="row">
+
         {% for article in articles %}
             <div class="col-lg-4">
                 <div class="card">
@@ -34,9 +35,45 @@
         {% endfor %}
         </div>
     </div>
-    {% endif %}
+    {% endif %}-->
+<div class="btn btn-success">ADD CONTENT</div>
 
-    {% include 'fragments/footer.html' %}
-    {% include 'fragments/core/core_js.html' %}
+<div class="container">
+    <div id="data-here" class="row">
+
+    </div>
+</div>
+
+
+{% include 'fragments/footer.html' %}
+{% include 'fragments/core/core_js.html' %}
+
+<script>
+    let count = 0;
+    $('.btn').click(function () {
+        $.ajax({
+            type: "GET",
+            url: "{% url 'load_data' %}",
+            success: function (data) {
+                $('#data-here').append(
+                    '<div class="col-lg-4">\n' +
+                    '                <div class="card">\n' +
+                    '                    <div class="card-header">' + data.title + count++ + '</div>' +
+                    '                    <div class="card-body">\n' + data.text + '</div>' +
+                    '<div class="card-footer">\n' +
+                    '                        <div class="btn btn-dark"><a href="/article/' + data.id + '">more</a></div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>'
+                );
+                console.log(data);
+            },
+            error: function (err) {
+                console.log('Error');
+                console.log(err);
+            }
+        });
+    });
+</script>
 </body>
 </html>

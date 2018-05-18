@@ -3,6 +3,9 @@ from ..models.models import Article
 
 from ..forms import NameForm
 
+from django.http import HttpResponse
+from django.http import JsonResponse
+
 
 def article_view(request):
     article = {
@@ -34,3 +37,30 @@ def get_data(request):
         return render(request, 'some.html', some)
 
     return render(request, 'some.html', {'title': '12341234'})
+
+
+def remove_data(request):
+    article = {
+        'articles': Article.objects.order_by('id'),
+    }
+    return render(request, 'article-remove.html', article)
+
+
+def remove(request):
+    if request.method == 'POST':
+        Article.objects.get(id=int(request.POST["article_id"])).delete()
+    return HttpResponse('asd')
+
+
+def load_data(request):
+
+    result = {
+        "id": Article.objects.all()[:1].values()[0]['id'],
+        "title": Article.objects.all()[:1].values()[0]['title'],
+        "text": Article.objects.all()[:1].values()[0]['text']
+
+    }
+
+    print('\n\n\n')
+    print(Article.objects.all()[:1].values()[0]['id'])
+    return JsonResponse(result)

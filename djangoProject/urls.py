@@ -26,6 +26,9 @@ urlpatterns = [
     path('article/<int:article_id>', view.article_view2, name='article_page'),
     path('addArticle/', view.add_article, name='addArticle'),
     path('getData/', view.get_data),
-    path('some/', view.get_data, name='some')
+    path('some/', view.get_data, name='some'),
+    path('remove/', view.remove, name='remove'),
+    path('removeData/', view.remove_data, name='remove_data'),
+    path('loadData/', view.load_data, name='load_data')
 
 ]

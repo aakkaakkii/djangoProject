@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'fragments/core/core_css.html' %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+{% include 'fragments/navbar.html' %}
+
+
+<div class="container">
+    <div class="row">
+        {% if articles %}
+            {% for article in articles %}
+                <div class="col-lg-12" style="padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.41)">
+                    <span>{{ article.title }}</span>
+                    <span class="float-right"><div data-id="{{ article.id }}" class="btn btn-success remove-btn">remove</div></span>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+{% include 'fragments/footer.html' %}
+{% include 'fragments/core/core_js.html' %}
+
+<script>
+    $('.remove-btn').click(function () {
+        $.ajax({
+            type: "POST",
+            url:"{% url 'remove' %}",
+            data: {
+                "csrfmiddlewaretoken": "{{ csrf_token }}",
+                "article_id":$(this).attr("data-id")
+            },
+            success: function () {
+
+            },
+            error: function (err) {
+                console.log('Error');
+                console.log(err);
+            }
+        });
+
+        $(this).parent().parent().remove();
+    });
+</script>
+
+</body>
+</html>
