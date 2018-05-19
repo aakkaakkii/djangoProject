@@ -52,21 +52,25 @@
     let count = 0;
     $('.btn').click(function () {
         $.ajax({
-            type: "GET",
+            type: "POST",
+            data: {
+                "csrfmiddlewaretoken": "{{ csrf_token }}",
+                "post_id": count
+            },
             url: "{% url 'load_data' %}",
             success: function (data) {
-                $('#data-here').append(
-                    '<div class="col-lg-4">\n' +
-                    '                <div class="card">\n' +
-                    '                    <div class="card-header">' + data.title + count++ + '</div>' +
-                    '                    <div class="card-body">\n' + data.text + '</div>' +
-                    '<div class="card-footer">\n' +
-                    '                        <div class="btn btn-dark"><a href="/article/' + data.id + '">more</a></div>\n' +
-                    '                    </div>\n' +
-                    '                </div>\n' +
-                    '            </div>'
-                );
-                console.log(data);
+                if ( !jQuery.isEmptyObject(data) )
+                    $('#data-here').append(
+                        '<div class="col-lg-4">\n' +
+                        '                <div class="card">\n' +
+                        '                    <div class="card-header">' + data.title + count++ + '</div>' +
+                        '                    <div class="card-body">\n' + data.text + '</div>' +
+                        '<div class="card-footer">\n' +
+                        '                        <div class="btn btn-dark"><a href="/article/' + data.id + '">more</a></div>\n' +
+                        '                    </div>\n' +
+                        '                </div>\n' +
+                        '            </div>'
+                    );
             },
             error: function (err) {
                 console.log('Error');

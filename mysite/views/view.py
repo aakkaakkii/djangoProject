@@ -53,14 +53,13 @@ def remove(request):
 
 
 def load_data(request):
-
-    result = {
-        "id": Article.objects.all()[:1].values()[0]['id'],
-        "title": Article.objects.all()[:1].values()[0]['title'],
-        "text": Article.objects.all()[:1].values()[0]['text']
-
-    }
-
-    print('\n\n\n')
-    print(Article.objects.all()[:1].values()[0]['id'])
+    result = {}
+    if request.method == 'POST':
+        post_id = int(request.POST["post_id"])
+        if post_id < Article.objects.all().__len__():
+            result = {
+                "id": Article.objects.all()[post_id:post_id+1].values()[0]['id'],
+                "title": Article.objects.all()[post_id:post_id+1].values()[0]['title'],
+                "text": Article.objects.all()[post_id:post_id+1].values()[0]['text']
+            }
     return JsonResponse(result)
