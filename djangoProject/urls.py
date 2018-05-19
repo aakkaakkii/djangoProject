@@ -18,7 +18,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path
 
-from mysite.views import view
+from mysite.views import view, login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +29,9 @@ urlpatterns = [
     path('some/', view.get_data, name='some'),
     path('remove/', view.remove, name='remove'),
     path('removeData/', view.remove_data, name='remove_data'),
-    path('loadData/', view.load_data, name='load_data')
+    path('loadData/', view.load_data, name='load_data'),
+    path('login/', login.login_view, name='login'),
+    path('logout/', login.logout_view, name='logout'),
+    path('register/', login.register_view, name='register')
 
 ]

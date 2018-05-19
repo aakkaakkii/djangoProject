@@ -1,0 +1,23 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% include 'fragments/core/core_css.html' %}
+
+</head>
+<body>
+
+<form method="post" action="" >
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" class="btn" value="{{ title }}">
+</form>
+
+
+{% include 'fragments/core/core_js.html' %}
+
+</body>
+</html>
