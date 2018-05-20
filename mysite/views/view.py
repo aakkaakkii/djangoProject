@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from ..models.models import Article
 
+from django.contrib.auth.decorators import login_required
+
+from ..models.models import Article
 from ..forms import NameForm
 
 from django.http import HttpResponse
@@ -21,6 +23,7 @@ def article_view2(request, article_id):
     return render(request, 'article.html', article)
 
 
+@login_required(login_url='/login/')
 def add_article(request):
     return render(request, 'article-add-page.html', {})
 
@@ -39,6 +42,7 @@ def get_data(request):
     return render(request, 'some.html', {'title': '12341234'})
 
 
+@login_required(login_url='/login/')
 def remove_data(request):
     article = {
         'articles': Article.objects.order_by('id'),

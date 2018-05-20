@@ -24,6 +24,19 @@
                 <li>
                     <a class="nav-link" href="{% url 'remove_data' %}"> remove</a>
                 </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="nav-link" href="{% url 'logout' %}"> logout</a>
+                </li>
+
+                {% else %}
+                <li>
+                    <a class="nav-link" href="{% url 'login' %}"> login</a>
+                </li>
+                <li>
+                    <a class="nav-link" href="{% url 'register' %}"> register</a>
+                </li>
+                {% endif %}
                </ul>
         </div>
     </div>
